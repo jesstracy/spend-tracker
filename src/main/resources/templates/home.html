@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="SpendTrackerApp">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="js/home-ng-controller.js"></script>
+    <title>Spend Tracker App</title>
+</head>
+<body ng-controller="SpendTrackerController">
+{{! changing the mustache delimiter so it doesn't conflict with }}
+{{! the default angularjs delimeters - https://mustache.github.io/mustache.5.html for more info }}
+{{=<% %>=}}
+
+<br/>
+~welcome~
+
+<br/><br/>
+
+Does angular work?
+{{angularTest}}
+
+
+</body>
+</html>
