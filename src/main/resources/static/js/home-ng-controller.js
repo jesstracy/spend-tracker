@@ -10,7 +10,30 @@ angular.module('SpendTrackerApp', [])
                     function successCallback(response) {
                         console.log(response.data);
                         console.log("Adding data to scope");
-                        $scope.allSubmissions = response.data;
+                        //$scope.allSubmissions = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log("Unable to get data...");
+                    });
+        };
+
+        $scope.submitTransaction = function(date, name, amount, type, medium, category) {
+            console.log("In submitTransaction function in home-ng-controller");
+
+            var newTransaction = {
+                date: date,
+                amount: amount,
+                type: type,
+                medium: medium,
+                category: category
+            }
+
+            $http.post("/submitTransaction.json", newTransaction)
+                .then(
+                    function successCallback(response) {
+                        //console.log(response.data);
+                        //console.log("Adding data to scope");
+                        //$scope.allSubmissions = response.data;
                     },
                     function errorCallback(response) {
                         console.log("Unable to get data...");
