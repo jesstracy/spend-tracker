@@ -49,9 +49,9 @@ angular.module('SpendTrackerApp', [])
             $http.post("/seeAllTransactions.json")
                 .then(
                     function successCallback(response) {
-                        //console.log(response.data);
-                        //console.log("Adding data to scope");
-                        //$scope.allSubmissions = response.data;
+                        console.log(response.data);
+                        console.log("Adding data to scope");
+                        $scope.allTransactions = response.data;
                     },
                     function errorCallback(response) {
                         console.log("Unable to get data...");

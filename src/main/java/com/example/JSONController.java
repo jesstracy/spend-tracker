@@ -28,7 +28,16 @@ public class JSONController {
     }
 
     @RequestMapping(path = "/seeAllTransactions.json", method = RequestMethod.POST)
-    public void seeAllTransactions() {
+    public ArrayList<Transaction> seeAllTransactions() {
+        Iterable<Transaction> iterableTransactions = transactionRepo.findAll();
+        ArrayList<Transaction> allTransactions = new ArrayList<>();
+        for (Transaction transaction : iterableTransactions) {
+            allTransactions.add(transaction);
+        }
+        return allTransactions;
+    }
+
+    public void printAllTransactions() {
         Iterable<Transaction> allTransactions = transactionRepo.findAll();
         System.out.println("******* All Transactions *********");
         for (Transaction transaction : allTransactions) {
