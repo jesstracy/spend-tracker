@@ -27,8 +27,8 @@ public class JSONController {
         transactionRepo.save(newTransaction);
     }
 
-    @RequestMapping(path = "/seeAllTransactions.json", method = RequestMethod.POST)
-    public ArrayList<Transaction> seeAllTransactions() {
+    @RequestMapping(path = "/getAllTransactions.json", method = RequestMethod.POST)
+    public ArrayList<Transaction> getAllTransactions() {
         Iterable<Transaction> iterableTransactions = transactionRepo.findAll();
         ArrayList<Transaction> allTransactions = new ArrayList<>();
         for (Transaction transaction : iterableTransactions) {
@@ -50,5 +50,21 @@ public class JSONController {
             System.out.println();
         }
         System.out.println("*********************************");
+    }
+
+    @RequestMapping(path = "/getTransactionsByType.json", method = RequestMethod.POST)
+    public ArrayList<Transaction> getTransactionsByType(@RequestBody TransactionType type) {
+        if (type.equals(TransactionType.DEPOSIT) || type.equals(TransactionType.WITHDRAWAL)) {
+            ArrayList<Transaction> allByType = transactionRepo.findAllByType(type);
+            return allByType;
+        } else {
+            System.out.println("Parameter invalid");
+            return null;
+        }
+    }
+
+    public ArrayList<Transaction> getTransactionsByMonth(String date) {
+        ArrayList<Transaction> allByMonth = transactionRepo.findAllByDate(date);
+        return allByMonth;
     }
 }

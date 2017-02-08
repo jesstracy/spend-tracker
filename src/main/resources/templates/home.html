@@ -31,7 +31,8 @@ Category: <input type="radio" name="category" ng-model="category" value="GROCERY
 <button type="button" ng-click="submitTransaction(date, name, amount, type, medium, category)">Submit</button>
 
 <br/><br/><br/>
-<button type="button" ng-click="seeAllTransactions()">See all transactions</button>
+<button type="button" ng-click="getAllTransactions()">See all transactions</button> <br/>
+<input type="radio" name="typeFilter" ng-model="typeFilter" value="WITHDRAWAL">Withdrawal <input type="radio" name="typeFilter" ng-model="typeFilter" value="DEPOSIT">Deposit<button type="button" ng-click="getTransactionsByType(typeFilter)">See all by type</button> <br/>
 
 <ul>
     <span ng-repeat="transaction in allTransactions">

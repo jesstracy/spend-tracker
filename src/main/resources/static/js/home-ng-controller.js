@@ -43,10 +43,10 @@ angular.module('SpendTrackerApp', [])
                     });
         };
 
-        $scope.seeAllTransactions = function() {
-            console.log("In seeAllTransactions function in home-ng-controller");
+        $scope.getAllTransactions = function() {
+            console.log("In getAllTransactions function in home-ng-controller");
 
-            $http.post("/seeAllTransactions.json")
+            $http.post("/getAllTransactions.json")
                 .then(
                     function successCallback(response) {
                         console.log(response.data);
@@ -58,5 +58,19 @@ angular.module('SpendTrackerApp', [])
                     });
         };
 
+        $scope.getTransactionsByType = function(type) {
+            console.log("In getTransactionsByType function in home-ng-controller");
+
+            $http.post("/getTransactionsByType.json", type)
+                .then(
+                    function successCallback(response) {
+                        console.log(response.data);
+                        console.log("Adding data to scope");
+                        $scope.allTransactions = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log("Unable to get data...");
+                    });
+        };
 
     });
