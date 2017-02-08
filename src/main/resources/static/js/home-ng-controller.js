@@ -22,13 +22,31 @@ angular.module('SpendTrackerApp', [])
 
             var newTransaction = {
                 date: date,
+                name: name,
                 amount: amount,
                 type: type,
                 medium: medium,
                 category: category
             }
 
+            console.log(newTransaction);
+
             $http.post("/submitTransaction.json", newTransaction)
+                .then(
+                    function successCallback(response) {
+                        //console.log(response.data);
+                        //console.log("Adding data to scope");
+                        //$scope.allSubmissions = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log("Unable to get data...");
+                    });
+        };
+
+        $scope.seeAllTransactions = function() {
+            console.log("In seeAllTransactions function in home-ng-controller");
+
+            $http.post("/seeAllTransactions.json")
                 .then(
                     function successCallback(response) {
                         //console.log(response.data);

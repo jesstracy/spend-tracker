@@ -1,14 +1,12 @@
 package com.example;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
  * Created by jessicatracy on 2/3/17.
  */
+@Entity
 @Table(name = "transactions")
 public class Transaction {
     @GeneratedValue
@@ -36,13 +34,13 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(String date, String name, double amount, String type, String medium, String category) {
+    public Transaction(String date, String name, double amount, TransactionType type, TransactionMedium medium, TransactionCategory category) {
         this.date = date;
         this.amount = amount;
         this.name = name;
-        this.type = convertType(type);
-        this.medium = convertMedium(medium);
-        this.category = convertCategory(category);
+        this.type = type;
+        this.medium = medium;
+        this.category = category;
     }
 
     //Getters and setters
@@ -98,47 +96,5 @@ public class Transaction {
         this.category = category;
     }
 
-    //Conversion methods
-    private TransactionType convertType(String type) {
-        if (type.equals("Withdrawal")) {
-            return TransactionType.WITHDRAWAL;
-        } else if (type.equals("Deposit")) {
-            return TransactionType.DEPOSIT;
-        } else {
-            return null;
-        }
-    }
-
-    private TransactionMedium convertMedium(String medium) {
-        if (medium.equals("Credit card")) {
-            return TransactionMedium.CREDIT_CARD;
-        } else if (medium.equals("Debit card")) {
-            return TransactionMedium.DEBIT_CARD;
-        } else if (medium.equals("Cash")) {
-            return TransactionMedium.CASH;
-        } else if (medium.equals("Check")) {
-            return TransactionMedium.CHECK;
-        } else {
-            return null;
-        }
-    }
-
-    private TransactionCategory convertCategory(String category) {
-        if (category.equals("Grocery")) {
-            return TransactionCategory.GROCERY;
-        } else if (category.equals("Gas")) {
-            return TransactionCategory.GAS;
-        } else if (category.equals("Restaurant")) {
-            return TransactionCategory.RESTAURANT;
-        } else if (category.equals("Entertainment")) {
-            return TransactionCategory.ENTERTAINMENT;
-        } else if (category.equals("Monthly bill")) {
-            return TransactionCategory.MONTHLY_BILL;
-        } else if (category.equals("Other")) {
-            return TransactionCategory.OTHER;
-        } else {
-            return null;
-        }
-    }
 }
 

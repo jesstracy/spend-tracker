@@ -25,10 +25,12 @@ Enter a new transaction:<br/>
 Date: <input type="text" ng-model="date" placeholder="Ex: Jan2017"/> <br/>
 Name: <input type="text" ng-model="name"/> <br/>
 Amount: <input type="text" ng-model="amount"/> <br/>
-Type: <input type="radio" name="type" ng-model="type">Withdrawal <input type="radio" name="type" ng-model="type">Deposit <br/>
-Medium: <input type="radio" name="medium" ng-model="medium">Credit card <input type="radio" name="medium" ng-model="medium">Debit card <input type="radio" name="medium" ng-model="medium">Cash <input type="radio" name="medium" ng-model="medium">Check <br/>
-Category: <input type="radio" name="category" ng-model="category">Grocery <input type="radio" name="category" ng-model="category">Gas <input type="radio" name="category" ng-model="category">Restaurant <input type="radio" name="category" ng-model="category">Entertainment <input type="radio" name="category" ng-model="category">Monthly bill <input type="radio" name="category" ng-model="category">Other <br/>
+Type: <input type="radio" name="type" ng-model="type" value="WITHDRAWAL">Withdrawal <input type="radio" name="type" ng-model="type" value="DEPOSIT">Deposit <br/>
+Medium: <input type="radio" name="medium" ng-model="medium" value="CREDIT_CARD">Credit card <input type="radio" name="medium" ng-model="medium" value="DEBIT_CARD">Debit card <input type="radio" name="medium" ng-model="medium" value="CASH">Cash <input type="radio" name="medium" ng-model="medium" value="CHECK">Check <br/>
+Category: <input type="radio" name="category" ng-model="category" value="GROCERY">Grocery <input type="radio" name="category" ng-model="category" value="GAS">Gas <input type="radio" name="category" ng-model="category" value="RESTAURANT">Restaurant <input type="radio" name="category" ng-model="category" value="ENTERTAINMENT">Entertainment <input type="radio" name="category" ng-model="category" value="MONTHLY_BILL">Monthly bill <input type="radio" name="category" ng-model="category" value="OTHER">Other <br/>
 <button type="button" ng-click="submitTransaction(date, name, amount, type, medium, category)">Submit</button>
 
+<br/><br/><br/>
+<button type="button" ng-click="seeAllTransactions()">See all transactions</button>
 </body>
 </html>
