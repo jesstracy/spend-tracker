@@ -73,4 +73,19 @@ angular.module('SpendTrackerApp', [])
                     });
         };
 
+        $scope.getTransactionsByDate = function(date) {
+            console.log("In getTransactionsByDate function in home-ng-controller");
+
+            $http.post("/getTransactionsByDate.json", date)
+                .then(
+                    function successCallback(response) {
+                        console.log(response.data);
+                        console.log("Adding data to scope");
+                        $scope.allTransactions = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log("Unable to get data...");
+                    });
+        };
+
     });

@@ -22,19 +22,31 @@ public class Transaction {
     @Column(nullable = false)
     private String name;
 
+//    @Column(nullable = false)
+//    @Enumerated(EnumType.STRING)
+//    private TransactionType type;
+//
+//    @Column
+//    @Enumerated(EnumType.STRING)
+//    private TransactionMedium medium;
+//
+//    @Column
+//    @Enumerated(EnumType.STRING)
+//    private TransactionCategory category;
+
     @Column(nullable = false)
-    private TransactionType type;
+    private String type;
 
     @Column
-    private TransactionMedium medium;
+    private String medium;
 
     @Column
-    private TransactionCategory category;
+    private String category;
 
     public Transaction() {
     }
 
-    public Transaction(String date, String name, double amount, TransactionType type, TransactionMedium medium, TransactionCategory category) {
+    public Transaction(String date, String name, double amount, String type, String medium, String category) {
         this.date = date;
         this.amount = amount;
         this.name = name;
@@ -72,27 +84,27 @@ public class Transaction {
         this.name = name;
     }
 
-    public TransactionType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(TransactionType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public TransactionMedium getMedium() {
+    public String getMedium() {
         return medium;
     }
 
-    public void setMedium(TransactionMedium medium) {
+    public void setMedium(String medium) {
         this.medium = medium;
     }
 
-    public TransactionCategory getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(TransactionCategory category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

@@ -53,8 +53,8 @@ public class JSONController {
     }
 
     @RequestMapping(path = "/getTransactionsByType.json", method = RequestMethod.POST)
-    public ArrayList<Transaction> getTransactionsByType(@RequestBody TransactionType type) {
-        if (type.equals(TransactionType.DEPOSIT) || type.equals(TransactionType.WITHDRAWAL)) {
+    public ArrayList<Transaction> getTransactionsByType(@RequestBody String type) {
+        if (type.equals("Deposit") || type.equals("Withdrawal")) {
             ArrayList<Transaction> allByType = transactionRepo.findAllByType(type);
             return allByType;
         } else {
@@ -63,7 +63,8 @@ public class JSONController {
         }
     }
 
-    public ArrayList<Transaction> getTransactionsByMonth(String date) {
+    @RequestMapping(path = "/getTransactionsByDate.json", method = RequestMethod.POST)
+    public ArrayList<Transaction> getTransactionsByDate(@RequestBody String date) {
         ArrayList<Transaction> allByMonth = transactionRepo.findAllByDate(date);
         return allByMonth;
     }
