@@ -39,5 +39,17 @@ Category: <input type="radio" name="category" ng-model="category" value="Grocery
         <li>{{transaction.date}} {{transaction.name}} {{transaction.amount}} {{transaction.type}}</li>
     </span>
 </ul>
+
+<br/><br/>
+Get monthly balance: <input type="text" ng-model="monthForBal"/> <button type="button" ng-click="getBalance(monthForBal)">Enter</button>
+
+<br/><br/>
+
+<span ng-if="monthlyBalance">
+    Balance for {{monthForBal}}: {{monthlyBalance}}
+</span>
+
+<br/><br/>
+
 </body>
 </html>

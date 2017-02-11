@@ -88,4 +88,19 @@ angular.module('SpendTrackerApp', [])
                     });
         };
 
+        $scope.getBalance = function(month) {
+            console.log("In getBalance function in home-ng-controller");
+
+            $http.post("/getBalance.json", month)
+                .then(
+                    function successCallback(response) {
+                        console.log(response.data);
+                        console.log("Adding data to scope");
+                        $scope.monthlyBalance = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log("Unable to get data...");
+                    });
+        };
+
     });

@@ -68,4 +68,18 @@ public class JSONController {
         ArrayList<Transaction> allByMonth = transactionRepo.findAllByDate(date);
         return allByMonth;
     }
+
+    @RequestMapping(path = "/getBalance.json", method = RequestMethod.POST)
+    public double getBalance(@RequestBody String month) {
+        double balance = 0.0;
+        ArrayList<Transaction> allByMonth = transactionRepo.findAllByDate(month);
+        for (Transaction transaction : allByMonth) {
+            if (transaction.getType().equals("Withdrawal")) {
+                balance -= transaction.getAmount();
+            } else if (transaction.getType().equals("Deposit")) {
+                balance += transaction.getAmount();
+            }
+        }
+        return balance;
+    }
 }
