@@ -69,6 +69,13 @@ public class JSONController {
         return allByMonth;
     }
 
+    @RequestMapping(path = "/deleteTransaction.json", method = RequestMethod.POST)
+    public ArrayList<Transaction> deleteTransaction(@RequestBody int id) {
+        transactionRepo.delete(id);
+        ArrayList<Transaction> allTransactions = getAllTransactions();
+        return allTransactions;
+    }
+
     @RequestMapping(path = "/getBalance.json", method = RequestMethod.POST)
     public double getBalance(@RequestBody String month) {
         double balance = 0.0;

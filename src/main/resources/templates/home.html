@@ -26,8 +26,8 @@ Date: <input type="text" ng-model="date" placeholder="Ex: Jan2017"/> <br/>
 Name: <input type="text" ng-model="name"/> <br/>
 Amount: <input type="text" ng-model="amount"/> <br/>
 Type: <input type="radio" name="type" ng-model="type" value="Withdrawal">Withdrawal <input type="radio" name="type" ng-model="type" value="Deposit">Deposit <br/>
-Medium: <input type="radio" name="medium" ng-model="medium" value="Credit card">Credit card <input type="radio" name="medium" ng-model="medium" value="Debit card">Debit card <input type="radio" name="medium" ng-model="medium" value="Cash">Cash <input type="radio" name="medium" ng-model="medium" value="Check">Check <br/>
-Category: <input type="radio" name="category" ng-model="category" value="Grocery">Grocery <input type="radio" name="category" ng-model="category" value="Gas">Gas <input type="radio" name="category" ng-model="category" value="Restaurant">Restaurant <input type="radio" name="category" ng-model="category" value="Entertainment">Entertainment <input type="radio" name="category" ng-model="category" value="Monthly bill">Monthly bill <input type="radio" name="category" ng-model="category" value="Other">Other <br/>
+Medium: <input type="radio" name="medium" ng-model="medium" value="Credit card">Credit card <input type="radio" name="medium" ng-model="medium" value="Debit card">Debit card <input type="radio" name="medium" ng-model="medium" value="Cash">Cash <input type="radio" name="medium" ng-model="medium" value="Check">Check <input type="radio" name="medium" ng-model="medium" value="Direct deposit">Direct deposit <br/>
+Category: <input type="radio" name="category" ng-model="category" value="Grocery">Grocery <input type="radio" name="category" ng-model="category" value="Gas">Gas <input type="radio" name="category" ng-model="category" value="Restaurant">Restaurant <input type="radio" name="category" ng-model="category" value="Entertainment">Entertainment <input type="radio" name="category" ng-model="category" value="Monthly bill">Monthly bill <input type="radio" name="category" ng-model="category" value="Paycheck">Paycheck <input type="radio" name="category" ng-model="category" value="Other">Other <br/>
 <button type="button" ng-click="submitTransaction(date, name, amount, type, medium, category)">Submit</button>
 
 <br/><br/><br/>
@@ -36,7 +36,7 @@ Category: <input type="radio" name="category" ng-model="category" value="Grocery
 <input type="text" ng-model="dateFilter"/> <button type="button" ng-click="getTransactionsByDate(dateFilter)">See all by date</button>
 <ul>
     <span ng-repeat="transaction in allTransactions">
-        <li>{{transaction.date}} {{transaction.name}} {{transaction.amount}} {{transaction.type}}</li>
+        <li>{{transaction.date}} {{transaction.name}} {{transaction.amount}} {{transaction.type}} <button type="button" ng-click="deleteTransaction(transaction.id)">Delete</button> </button></li>
     </span>
 </ul>
 

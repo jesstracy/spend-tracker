@@ -103,4 +103,19 @@ angular.module('SpendTrackerApp', [])
                     });
         };
 
+        $scope.deleteTransaction = function(id) {
+            console.log("In deleteTransaction function in home-ng-controller");
+
+            $http.post("/deleteTransaction.json", id)
+                .then(
+                    function successCallback(response) {
+                        console.log(response.data);
+                        console.log("Adding data to scope");
+                        $scope.allTransactions = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log("Unable to get data...");
+                    });
+        };
+
     });
