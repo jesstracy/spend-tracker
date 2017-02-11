@@ -1,6 +1,7 @@
 angular.module('SpendTrackerApp', [])
    .controller('SpendTrackerController', function($scope, $http, $window) {
         $scope.angularTest = "yes";
+        $scope.loginScreen = true;
 
         $scope.login = function(email, password) {
             console.log("In login function in home-ng-controller");
@@ -16,6 +17,7 @@ angular.module('SpendTrackerApp', [])
                         console.log(response.data);
                         console.log("Adding data to scope");
                         $scope.currentUser = response.data;
+                        $scope.loginScreen = false;
                     },
                     function errorCallback(response) {
                         console.log("Unable to get data...");
@@ -37,10 +39,18 @@ angular.module('SpendTrackerApp', [])
                         console.log(response.data);
                         console.log("Adding data to scope");
                         $scope.currentUser = response.data;
+                        $scope.loginScreen = false;
                     },
                     function errorCallback(response) {
                         console.log("Unable to get data...");
                     });
+        };
+
+        $scope.logout = function() {
+            console.log("In logout function in home-ng-controller");
+            $scope.loginScreen = true;
+            $scope.allTransactions = {};
+            $scope.monthlyBalance = false;
         };
 
         $scope.submitTransaction = function(date, name, amount, type, medium, category) {

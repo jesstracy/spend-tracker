@@ -16,26 +16,31 @@
 
 <br/><br/>
 
-Does angular work?
-{{angularTest}}
+<span ng-if="loginScreen">
+    Does angular work?
+    {{angularTest}}
 
-<br/><br/>
+    <br/><br/>
 
-Login: <br/>
-Email: <input type="text" ng-model="email"/> <br/>
-Password: <input type="text" ng-model="password"/> <br/>
-<button type="button" ng-click="login(email, password)">Login</button>
+    Login: <br/>
+    Email: <input type="text" ng-model="email"/> <br/>
+    Password: <input type="text" ng-model="password"/> <br/>
+    <button type="button" ng-click="login(email, password)">Login</button>
 
-<br/><br/>
-Or register: <br/>
-Email: <input type="text" ng-model="emailR"/> <br/>
-Password: <input type="text" ng-model="passwordR"/> <br/>
-Paycheck amount: <input type="number" ng-model="paycheckR"> <br/>
-<button type="button" ng-click="register(emailR, passwordR, paycheckR)">Register</button>
+    <br/><br/>
+    Or register: <br/>
+    Email: <input type="text" ng-model="emailR"/> <br/>
+    Password: <input type="text" ng-model="passwordR"/> <br/>
+    Paycheck amount: <input type="number" ng-model="paycheckR"> <br/>
+    <button type="button" ng-click="register(emailR, passwordR, paycheckR)">Register</button>
 
-<br/><br/>
+    <br/><br/>
 
-<span ng-if="currentUser">
+</span>
+
+<span ng-if="!loginScreen">
+    <button type="button" ng-click="logout()">Logout</button>
+    <br/><br/>
 
     Enter a new transaction:<br/>
     Date: <input type="text" ng-model="date" placeholder="Ex: Jan2017"/> <br/>
