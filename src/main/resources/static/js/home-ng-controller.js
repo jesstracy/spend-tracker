@@ -28,7 +28,7 @@ angular.module('SpendTrackerApp', [])
             var userInfo = {
                 email: email,
                 password: password,
-                paycheck = paycheck
+                paycheck: paycheck
             }
 
             $http.post("/register.json", userInfo)

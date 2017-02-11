@@ -16,15 +16,27 @@ public class JSONController {
     @Autowired
     TransactionRepository transactionRepo;
 
+    @Autowired
+    UserRepository userRepo;
+
     @RequestMapping(path = "/login.json", method = RequestMethod.POST)
-    public void login(@RequestBody User user) {
-//        System.out.println(newTransaction.getAmount());
-//        System.out.println(newTransaction.getName());
-//        System.out.println(newTransaction.getDate());
-//        System.out.println(newTransaction.getCategory());
-//        System.out.println(newTransaction.getMedium());
-//        System.out.println(newTransaction.getType());
-        transactionRepo.save(newTransaction);
+    public User login(@RequestBody User user) {
+        User retrievedUser = userRepo.findByEmail(user.getEmail());
+
+        if (retrievedUser != null) {
+            if (user.getPassword().equals(retrievedUser.getPassword())) {
+                return retrievedUser;
+            }
+        }
+        return null;
+    }
+
+    @RequestMapping(path = "/register.json", method = RequestMethod.POST)
+    public User register(@RequestBody User user) {
+        userRepo.save(user);
+        User retrievedUser = userRepo.findByEmail(user.getEmail());
+        System.out.println("Make sure user has id?? " + retrievedUser.getId());
+        return retrievedUser;
     }
 
     @RequestMapping(path = "/submitTransaction.json", method = RequestMethod.POST)
