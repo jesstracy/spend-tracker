@@ -16,6 +16,17 @@ public class JSONController {
     @Autowired
     TransactionRepository transactionRepo;
 
+    @RequestMapping(path = "/login.json", method = RequestMethod.POST)
+    public void login(@RequestBody User user) {
+//        System.out.println(newTransaction.getAmount());
+//        System.out.println(newTransaction.getName());
+//        System.out.println(newTransaction.getDate());
+//        System.out.println(newTransaction.getCategory());
+//        System.out.println(newTransaction.getMedium());
+//        System.out.println(newTransaction.getType());
+        transactionRepo.save(newTransaction);
+    }
+
     @RequestMapping(path = "/submitTransaction.json", method = RequestMethod.POST)
     public void submitTransaction(@RequestBody Transaction newTransaction) {
 //        System.out.println(newTransaction.getAmount());

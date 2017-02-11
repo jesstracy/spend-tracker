@@ -2,15 +2,41 @@ angular.module('SpendTrackerApp', [])
    .controller('SpendTrackerController', function($scope, $http, $window) {
         $scope.angularTest = "yes";
 
-        $scope.getData = function() {
-            console.log("In getData function in home-ng-controller");
+        $scope.login = function(email, password) {
+            console.log("In login function in home-ng-controller");
 
-            $http.post("/getData.json")
+            var userInfo = {
+                email: email,
+                password: password
+            }
+
+            $http.post("/login.json", userInfo)
                 .then(
                     function successCallback(response) {
                         console.log(response.data);
                         console.log("Adding data to scope");
-                        //$scope.allSubmissions = response.data;
+                        $scope.currentUser = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log("Unable to get data...");
+                    });
+        };
+
+        $scope.register = function(email, password, paycheck) {
+            console.log("In register function in home-ng-controller");
+
+            var userInfo = {
+                email: email,
+                password: password,
+                paycheck = paycheck
+            }
+
+            $http.post("/register.json", userInfo)
+                .then(
+                    function successCallback(response) {
+                        console.log(response.data);
+                        console.log("Adding data to scope");
+                        $scope.currentUser = response.data;
                     },
                     function errorCallback(response) {
                         console.log("Unable to get data...");
