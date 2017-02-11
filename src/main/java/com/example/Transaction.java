@@ -13,6 +13,9 @@ public class Transaction {
     @Id
     private int id;
 
+    @ManyToOne
+    private User user;
+
     @Column(nullable = false)
     private String date;
 
@@ -46,13 +49,14 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(String date, String name, double amount, String type, String medium, String category) {
+    public Transaction(String date, String name, double amount, String type, String medium, String category, User user) {
         this.date = date;
         this.amount = amount;
         this.name = name;
         this.type = type;
         this.medium = medium;
         this.category = category;
+        this.user = user;
     }
 
     //Getters and setters
@@ -108,5 +112,12 @@ public class Transaction {
         this.category = category;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
 

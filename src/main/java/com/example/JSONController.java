@@ -19,12 +19,15 @@ public class JSONController {
     @Autowired
     UserRepository userRepo;
 
+    User currentUser;
+
     @RequestMapping(path = "/login.json", method = RequestMethod.POST)
     public User login(@RequestBody User user) {
         User retrievedUser = userRepo.findByEmail(user.getEmail());
 
         if (retrievedUser != null) {
             if (user.getPassword().equals(retrievedUser.getPassword())) {
+                currentUser = retrievedUser;
                 return retrievedUser;
             }
         }
@@ -35,27 +38,24 @@ public class JSONController {
     public User register(@RequestBody User user) {
         userRepo.save(user);
         User retrievedUser = userRepo.findByEmail(user.getEmail());
-        System.out.println("Make sure user has id?? " + retrievedUser.getId());
+        currentUser = retrievedUser;
         return retrievedUser;
     }
 
     @RequestMapping(path = "/submitTransaction.json", method = RequestMethod.POST)
     public void submitTransaction(@RequestBody Transaction newTransaction) {
-//        System.out.println(newTransaction.getAmount());
-//        System.out.println(newTransaction.getName());
-//        System.out.println(newTransaction.getDate());
-//        System.out.println(newTransaction.getCategory());
-//        System.out.println(newTransaction.getMedium());
-//        System.out.println(newTransaction.getType());
+        newTransaction.setUser(currentUser);
         transactionRepo.save(newTransaction);
     }
 
     @RequestMapping(path = "/getAllTransactions.json", method = RequestMethod.POST)
     public ArrayList<Transaction> getAllTransactions() {
-        Iterable<Transaction> iterableTransactions = transactionRepo.findAll();
         ArrayList<Transaction> allTransactions = new ArrayList<>();
-        for (Transaction transaction : iterableTransactions) {
-            allTransactions.add(transaction);
+        if (currentUser != null) {
+            Iterable<Transaction> iterableTransactions = transactionRepo.findAllByUser(currentUser);
+            for (Transaction transaction : iterableTransactions) {
+                allTransactions.add(transaction);
+            }
         }
         return allTransactions;
     }
@@ -78,7 +78,7 @@ public class JSONController {
     @RequestMapping(path = "/getTransactionsByType.json", method = RequestMethod.POST)
     public ArrayList<Transaction> getTransactionsByType(@RequestBody String type) {
         if (type.equals("Deposit") || type.equals("Withdrawal")) {
-            ArrayList<Transaction> allByType = transactionRepo.findAllByType(type);
+            ArrayList<Transaction> allByType = transactionRepo.findAllByUserAndType(currentUser,type);
             return allByType;
         } else {
             System.out.println("Parameter invalid");
@@ -88,7 +88,7 @@ public class JSONController {
 
     @RequestMapping(path = "/getTransactionsByDate.json", method = RequestMethod.POST)
     public ArrayList<Transaction> getTransactionsByDate(@RequestBody String date) {
-        ArrayList<Transaction> allByMonth = transactionRepo.findAllByDate(date);
+        ArrayList<Transaction> allByMonth = transactionRepo.findAllByUserAndDate(currentUser,date);
         return allByMonth;
     }
 
@@ -102,7 +102,7 @@ public class JSONController {
     @RequestMapping(path = "/getBalance.json", method = RequestMethod.POST)
     public double getBalance(@RequestBody String month) {
         double balance = 0.0;
-        ArrayList<Transaction> allByMonth = transactionRepo.findAllByDate(month);
+        ArrayList<Transaction> allByMonth = transactionRepo.findAllByUserAndDate(currentUser,month);
         for (Transaction transaction : allByMonth) {
             if (transaction.getType().equals("Withdrawal")) {
                 balance -= transaction.getAmount();
