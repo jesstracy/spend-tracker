@@ -24,13 +24,13 @@
 
     Login: <br/>
     Email: <input type="text" ng-model="email"/> <br/>
-    Password: <input type="text" ng-model="password"/> <br/>
+    Password: <input type="password" ng-model="password"/> <br/>
     <button type="button" ng-click="login(email, password)">Login</button>
 
     <br/><br/>
     Or register: <br/>
     Email: <input type="text" ng-model="emailR"/> <br/>
-    Password: <input type="text" ng-model="passwordR"/> <br/>
+    Password: <input type="password" ng-model="passwordR"/> <br/>
     Paycheck amount: <input type="number" ng-model="paycheckR"> <br/>
     <button type="button" ng-click="register(emailR, passwordR, paycheckR)">Register</button>
 
@@ -50,6 +50,9 @@
     Medium: <input type="radio" name="medium" ng-model="medium" value="Credit card">Credit card <input type="radio" name="medium" ng-model="medium" value="Debit card">Debit card <input type="radio" name="medium" ng-model="medium" value="Cash">Cash <input type="radio" name="medium" ng-model="medium" value="Check">Check <input type="radio" name="medium" ng-model="medium" value="Direct deposit">Direct deposit <br/>
     Category: <input type="radio" name="category" ng-model="category" value="Grocery">Grocery <input type="radio" name="category" ng-model="category" value="Gas">Gas <input type="radio" name="category" ng-model="category" value="Restaurant">Restaurant <input type="radio" name="category" ng-model="category" value="Entertainment">Entertainment <input type="radio" name="category" ng-model="category" value="Monthly bill">Monthly bill <input type="radio" name="category" ng-model="category" value="Paycheck">Paycheck <input type="radio" name="category" ng-model="category" value="Other">Other <br/>
     <button type="button" ng-click="submitTransaction(date, name, amount, type, medium, category)">Submit</button>
+    Or.. <br/>
+    Date: <input type="text" ng-model="dateP" placeholder="Ex: Jan2017"/> <br/>
+    <button type="button" ng-click="submitTransaction(dateP, 'Paycheck', 'PYCHK-AMT', 'Deposit', 'Direct deposit', 'Paycheck')">Paycheck</button>
 
     <br/><br/><br/>
     <button type="button" ng-click="getAllTransactions()">See all transactions</button> <br/>

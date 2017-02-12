@@ -65,6 +65,10 @@ angular.module('SpendTrackerApp', [])
                 category: category
             }
 
+            if (amount === "PYCHK-AMT") {
+                newTransaction.amount = $scope.currentUser.paycheck;
+            }
+
             console.log(newTransaction);
 
             $http.post("/submitTransaction.json", newTransaction)
