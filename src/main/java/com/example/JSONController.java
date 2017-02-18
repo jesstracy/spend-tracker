@@ -136,7 +136,30 @@ public class JSONController {
 //            ArrayList<Transaction> allByDate = transactionRepo.findAllByUserAndDate(currentUser, transactionEx.getDate());
         }
         if (dateSet) {
-            //tree in here to set others too
+            if (typeSet) {
+                if (categorySet) {
+                    if (mediumSet) {
+                        //return date, type, category, medium
+                    } else {
+                        //return date, type, category
+                    }
+                } else if (mediumSet) {
+                    //return date, type, medium
+                } else {
+                    //return date and type
+                }
+            } else if (categorySet) {
+                //more tree, not date, type
+                if (mediumSet) {
+                    //return date, category, medium
+                } else {
+                    //reutrn date, category
+                }
+            } else if (mediumSet) {
+                //return date and medium
+            } else {
+                //return just date
+            }
         } else if (typeSet) {
             //tree in here to set others but not date
         } else if (categorySet) {
