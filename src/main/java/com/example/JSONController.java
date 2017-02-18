@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by jessicatracy on 2/5/17.
@@ -111,5 +112,40 @@ public class JSONController {
             }
         }
         return balance;
+    }
+
+    @RequestMapping(path = "/submitDisplayOptions.json", method = RequestMethod.POST)
+    public ArrayList<Transaction> submitDisplayOptions(@RequestBody Transaction transactionEx) {
+        boolean dateSet = false, typeSet = false, categorySet = false, mediumSet = false;
+        ArrayList<Transaction> transactions = new ArrayList<>();
+
+        if (transactionEx.getDate() != null) {
+            dateSet = true;
+//            ArrayList<Transaction> allByDate = transactionRepo.findAllByUserAndDate(currentUser, transactionEx.getDate());
+        }
+        if (transactionEx.getType() != null) {
+            typeSet = true;
+//            ArrayList<Transaction> allByDate = transactionRepo.findAllByUserAndDate(currentUser, transactionEx.getDate());
+        }
+        if (transactionEx.getCategory() != null) {
+            categorySet = true;
+//            ArrayList<Transaction> allByDate = transactionRepo.findAllByUserAndDate(currentUser, transactionEx.getDate());
+        }
+        if (transactionEx.getMedium() != null) {
+            mediumSet = true;
+//            ArrayList<Transaction> allByDate = transactionRepo.findAllByUserAndDate(currentUser, transactionEx.getDate());
+        }
+        if (dateSet) {
+            //tree in here to set others too
+        } else if (typeSet) {
+            //tree in here to set others but not date
+        } else if (categorySet) {
+            //tree in here to set others but not date, type
+        } else if (mediumSet) {
+            //tree in here to set others but not date, type, category
+        } else {
+            return transactions;
+        }
+        return null;
     }
 }

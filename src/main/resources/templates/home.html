@@ -55,14 +55,14 @@
     <button type="button" ng-click="submitTransaction(dateP, 'Paycheck', 'PYCHK-AMT', 'Deposit', 'Direct deposit', 'Paycheck')">Paycheck</button>
 
     <br/><br/><br/>
-    <button type="button" ng-click="getAllTransactions()">See all transactions</button> <br/>
-    <input type="radio" name="typeFilter" ng-model="typeFilter" value="Withdrawal">Withdrawal <input type="radio" name="typeFilter" ng-model="typeFilter" value="Deposit">Deposit<button type="button" ng-click="getTransactionsByType(typeFilter)">See all by type</button> <br/>
-    <input type="text" ng-model="dateFilter"/> <button type="button" ng-click="getTransactionsByDate(dateFilter)">See all by date</button>
-    <ul>
-        <span ng-repeat="transaction in allTransactions">
-            <li>{{transaction.date}} {{transaction.name}} {{transaction.amount}} {{transaction.type}} <button type="button" ng-click="deleteTransaction(transaction.id)">Delete</button> </button></li>
-        </span>
-    </ul>
+    <!--<button type="button" ng-click="getAllTransactions()">See all transactions</button> <br/>-->
+    <!--<input type="radio" name="typeFilter" ng-model="typeFilter" value="Withdrawal">Withdrawal <input type="radio" name="typeFilter" ng-model="typeFilter" value="Deposit">Deposit<button type="button" ng-click="getTransactionsByType(typeFilter)">See all by type</button> <br/>-->
+    <!--<input type="text" ng-model="dateFilter"/> <button type="button" ng-click="getTransactionsByDate(dateFilter)">See all by date</button>-->
+    <!--<ul>-->
+        <!--<span ng-repeat="transaction in allTransactions">-->
+            <!--<li>{{transaction.date}} {{transaction.name}} {{transaction.amount}} {{transaction.type}} <button type="button" ng-click="deleteTransaction(transaction.id)">Delete</button> </button></li>-->
+        <!--</span>-->
+    <!--</ul>-->
 
     <br/><br/>
     Get monthly balance: <input type="text" ng-model="monthForBal"/> <button type="button" ng-click="getBalance(monthForBal)">Enter</button>
@@ -74,6 +74,15 @@
     </span>
 
     <br/><br/>
+
+    <!-- Menu for displaying transactions based on criteria: date, type, medium, category, and combinations of those -->
+    Display all transactions based on:
+    <input type="checkbox" name="dateFilter">Date
+    <input type="checkbox" name="typeFilter">Type
+    <input type="checkbox" name="mediumFilter">Medium
+    <input type="checkbox" name="categoryFilter">Category
+
+    <button type="button" ng-click="submitDisplayOptions()">Submit</button>
 
 </span>
 

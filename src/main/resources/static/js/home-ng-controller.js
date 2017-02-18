@@ -158,4 +158,26 @@ angular.module('SpendTrackerApp', [])
                     });
         };
 
+        $scope.submitDisplayOptions = function(date, type, medium, category) {
+            console.log("In submitDisplayOptions function in home-ng-controller");
+
+            var displayCriteriaAsTransaction = {
+                date: date,
+                type: type,
+                medium: medium,
+                category: category
+            }
+
+            $http.post("/submitDisplayOptions.json", displayCriteriaAsTransaction)
+                .then(
+                    function successCallback(response) {
+                        console.log(response.data);
+                        console.log("Adding data to scope");
+                        $scope.allTransactions = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log("Unable to get data...");
+                    });
+        };
+
     });
