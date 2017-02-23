@@ -188,6 +188,9 @@ angular.module('SpendTrackerApp', [])
                 category: category
             }
 
+            console.log("This is the object I'm sending to backend:");
+            console.log(displayCriteriaAsTransaction)
+
             $http.post("/submitDisplayOptions.json", displayCriteriaAsTransaction)
                 .then(
                     function successCallback(response) {

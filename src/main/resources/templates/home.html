@@ -85,21 +85,30 @@
     <br/>
     <br/>
     <span ng-if="showDateSelection">
-        date show! <br/>
+        Date: <input type="text" ng-model="dateSelection" placeholder="Ex: Jan2017"/> <br/>
     </span>
     <span ng-if="showTypeSelection">
-        type show <br/>
+        Type: <input type="radio" name="typeSelection" ng-model="typeSelection" value="Withdrawal">Withdrawal <input type="radio" name="typeSelection" ng-model="typeSelection" value="Deposit">Deposit <br/>
     </span>
     <span ng-if="showMediumSelection">
-        medium show <br/>
+        Medium: <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Credit card">Credit card <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Debit card">Debit card <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Cash">Cash <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Check">Check <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Direct deposit">Direct deposit <br/>
     </span>
     <span ng-if="showCategorySelection">
-        category show <br/>
+        Category: <input type="radio" name="categorySelection" ng-model="categorySelection" value="Grocery">Grocery <input type="radio" name="categorySelection" ng-model="categorySelection" value="Gas">Gas <input type="radio" name="categorySelection" ng-model="categorySelection" value="Restaurant">Restaurant <input type="radio" name="categorySelection" ng-model="categorySelection" value="Entertainment">Entertainment <input type="radio" name="categorySelection" ng-model="categorySelection" value="Monthly bill">Monthly bill <input type="radio" name="categorySelection" ng-model="categorySelection" value="Paycheck">Paycheck <input type="radio" name="categorySelection" ng-model="categorySelection" value="Other">Other <br/>
     </span>
 
     <br/>
-    <button type="button" ng-click="submitDisplayOptions()">Submit</button>
+    <button type="button" ng-click="submitDisplayOptions(dateSelection, typeSelection, mediumSelection, categorySelection)">Submit</button>
 
+    <br/><br/>
+    Transactions (filter applied): <br/>
+    <ul>
+    <span ng-repeat="transaction in allTransactions">
+    <li>{{transaction.date}} {{transaction.name}} {{transaction.amount}} {{transaction.type}} <button type="button" ng-click="deleteTransaction(transaction.id)">Delete</button> </button></li>
+    </span>
+    </ul>
+
+    <br/>**Next time start with selection criteria values not coming through!!
 </span>
 
 </body>

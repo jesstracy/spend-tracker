@@ -120,6 +120,13 @@ public class JSONController {
         ArrayList<Transaction> transactions = new ArrayList<>();
         String date = null, type = null, medium = null, category = null;
 
+        System.out.println("In submitDisplayOptions in REST controller");
+        System.out.println("Current user: " + currentUser.getEmail());
+        System.out.println("Date: " + transactionEx.getDate());
+        System.out.println("Type: " + transactionEx.getType());
+        System.out.println("Medium: " + transactionEx.getMedium());
+        System.out.println("Category: " + transactionEx.getCategory());
+
         if (transactionEx.getDate() != null) {
             dateSet = true;
             date = transactionEx.getDate();
@@ -195,6 +202,9 @@ public class JSONController {
         } else if (mediumSet) {
             //return medium only
             transactions = transactionRepo.findAllByUserAndMedium(currentUser, medium);
+        } else {
+            //return all transactions
+            transactions = transactionRepo.findAllByUser(currentUser);
         }
         return transactions;
     }
