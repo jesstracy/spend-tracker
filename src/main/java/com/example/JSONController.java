@@ -118,71 +118,84 @@ public class JSONController {
     public ArrayList<Transaction> submitDisplayOptions(@RequestBody Transaction transactionEx) {
         boolean dateSet = false, typeSet = false, categorySet = false, mediumSet = false;
         ArrayList<Transaction> transactions = new ArrayList<>();
+        String date = null, type = null, medium = null, category = null;
 
         if (transactionEx.getDate() != null) {
             dateSet = true;
-//            ArrayList<Transaction> allByDate = transactionRepo.findAllByUserAndDate(currentUser, transactionEx.getDate());
+            date = transactionEx.getDate();
         }
         if (transactionEx.getType() != null) {
             typeSet = true;
-//            ArrayList<Transaction> allByDate = transactionRepo.findAllByUserAndDate(currentUser, transactionEx.getDate());
+            type = transactionEx.getType();
         }
         if (transactionEx.getCategory() != null) {
             categorySet = true;
-//            ArrayList<Transaction> allByDate = transactionRepo.findAllByUserAndDate(currentUser, transactionEx.getDate());
+            category = transactionEx.getCategory();
         }
         if (transactionEx.getMedium() != null) {
             mediumSet = true;
-//            ArrayList<Transaction> allByDate = transactionRepo.findAllByUserAndDate(currentUser, transactionEx.getDate());
+            medium = transactionEx.getMedium();
         }
         if (dateSet) {
             if (typeSet) {
                 if (categorySet) {
                     if (mediumSet) {
                         //return date, type, category, medium
+                        transactions = transactionRepo.findAllByUserAndDateAndTypeAndMediumAndCategory(currentUser, date, type, medium, category);
                     } else {
                         //return date, type, category
+                        transactions = transactionRepo.findAllByUserAndDateAndTypeAndCategory(currentUser, date, type, category);
                     }
                 } else if (mediumSet) {
                     //return date, type, medium
+                    transactions = transactionRepo.findAllByUserAndDateAndTypeAndMedium(currentUser, date, type, medium);
                 } else {
                     //return date and type
+                    transactions = transactionRepo.findAllByUserAndDateAndType(currentUser, date, type);
                 }
             } else if (categorySet) {
-                //more tree, not date, type
                 if (mediumSet) {
                     //return date, category, medium
+                    transactions = transactionRepo.findAllByUserAndDateAndMediumAndCategory(currentUser, date, medium, category);
                 } else {
                     //reutrn date, category
+                    transactions = transactionRepo.findAllByUserAndDateAndCategory(currentUser, date, category);
                 }
             } else if (mediumSet) {
                 //return date and medium
+                transactions = transactionRepo.findAllByUserAndDateAndMedium(currentUser, date, medium);
             } else {
                 //return date only
+                transactions = transactionRepo.findAllByUserAndDate(currentUser, date);
             }
         } else if (typeSet) {
             if (categorySet) {
                 if (mediumSet) {
                     //return type, category, medium
+                    transactions = transactionRepo.findAllByUserAndTypeAndMediumAndCategory(currentUser, type, medium, category);
                 } else {
                     //return type, category
+                    transactions = transactionRepo.findAllByUserAndTypeAndCategory(currentUser, type, category);
                 }
             } else if (mediumSet) {
                 //return type, medium
+                transactions = transactionRepo.findAllByUserAndTypeAndMedium(currentUser, type, medium);
             } else {
                 // return type only
+                transactions = transactionRepo.findAllByUserAndType(currentUser, type);
             }
         } else if (categorySet) {
             if (mediumSet) {
                 //return category, medium
+                transactions = transactionRepo.findAllByUserAndMediumAndCategory(currentUser, medium, category);
             } else {
                 //return category only
+                transactions = transactionRepo.findAllByUserAndCategory(currentUser, category);
             }
         } else if (mediumSet) {
             //return medium only
-        } else {
-            return transactions;
+            transactions = transactionRepo.findAllByUserAndMedium(currentUser, medium);
         }
-        return null;
+        return transactions;
     }
 }
