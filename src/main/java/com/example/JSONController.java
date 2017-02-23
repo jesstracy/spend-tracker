@@ -158,14 +158,28 @@ public class JSONController {
             } else if (mediumSet) {
                 //return date and medium
             } else {
-                //return just date
+                //return date only
             }
         } else if (typeSet) {
-            //tree in here to set others but not date
+            if (categorySet) {
+                if (mediumSet) {
+                    //return type, category, medium
+                } else {
+                    //return type, category
+                }
+            } else if (mediumSet) {
+                //return type, medium
+            } else {
+                // return type only
+            }
         } else if (categorySet) {
-            //tree in here to set others but not date, type
+            if (mediumSet) {
+                //return category, medium
+            } else {
+                //return category only
+            }
         } else if (mediumSet) {
-            //tree in here to set others but not date, type, category
+            //return medium only
         } else {
             return transactions;
         }
