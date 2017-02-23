@@ -2,6 +2,10 @@ angular.module('SpendTrackerApp', [])
    .controller('SpendTrackerController', function($scope, $http, $window) {
         $scope.angularTest = "yes";
         $scope.loginScreen = true;
+        $scope.showDateSelection = false;
+        $scope.showTypeSelection = false;
+        $scope.showMediumSelection = false;
+        $scope.showCategorySelection = false;
 
         $scope.login = function(email, password) {
             console.log("In login function in home-ng-controller");
@@ -157,6 +161,22 @@ angular.module('SpendTrackerApp', [])
                         console.log("Unable to get data...");
                     });
         };
+
+        $scope.showDateOptions = function() {
+            $scope.showDateSelection = !$scope.showDateSelection;
+        }
+
+        $scope.showTypeOptions = function() {
+            $scope.showTypeSelection = !$scope.showTypeSelection;
+        }
+
+        $scope.showMediumOptions = function() {
+            $scope.showMediumSelection = !$scope.showMediumSelection;
+        }
+
+        $scope.showCategoryOptions = function() {
+            $scope.showCategorySelection = !$scope.showCategorySelection;
+        }
 
         $scope.submitDisplayOptions = function(date, type, medium, category) {
             console.log("In submitDisplayOptions function in home-ng-controller");

@@ -77,11 +77,27 @@
 
     <!-- Menu for displaying transactions based on criteria: date, type, medium, category, and combinations of those -->
     Display all transactions based on:
-    <input type="checkbox" name="dateFilter">Date
-    <input type="checkbox" name="typeFilter">Type
-    <input type="checkbox" name="mediumFilter">Medium
-    <input type="checkbox" name="categoryFilter">Category
+    <input type="checkbox" name="dateFilter" ng-click="showDateOptions()">Date
+    <input type="checkbox" name="typeFilter" ng-click="showTypeOptions()">Type
+    <input type="checkbox" name="mediumFilter" ng-click="showMediumOptions()">Medium
+    <input type="checkbox" name="categoryFilter" ng-click="showCategoryOptions()">Category
 
+    <br/>
+    <br/>
+    <span ng-if="showDateSelection">
+        date show! <br/>
+    </span>
+    <span ng-if="showTypeSelection">
+        type show <br/>
+    </span>
+    <span ng-if="showMediumSelection">
+        medium show <br/>
+    </span>
+    <span ng-if="showCategorySelection">
+        category show <br/>
+    </span>
+
+    <br/>
     <button type="button" ng-click="submitDisplayOptions()">Submit</button>
 
 </span>
