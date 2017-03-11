@@ -65,15 +65,6 @@
     <!--</ul>-->
 
     <br/><br/>
-    Get monthly balance: <input type="text" ng-model="monthForBal"/> <button type="button" ng-click="getBalance(monthForBal)">Enter</button>
-
-    <br/><br/>
-
-    <span ng-if="monthlyBalance">
-        Balance for {{monthForBal}}: {{monthlyBalance}}
-    </span>
-
-    <br/><br/>
 
     <!-- Menu for displaying transactions based on criteria: date, type, medium, category, and combinations of those -->
     Display all transactions based on: <br/>
@@ -86,14 +77,15 @@
     <button type="button" ng-click="submitDisplayOptions(dateSelection, typeSelection, mediumSelection, categorySelection)">Submit</button>
 
     <br/><br/>
-    Transactions (filter applied): <br/>
+    Transactions (based on selected criteria): <br/>
     <ul>
     <span ng-repeat="transaction in allTransactions">
     <li>{{transaction.date}} {{transaction.name}} {{transaction.amount}} ({{transaction.type}}, {{transaction.medium}}, {{transaction.category}}) <button type="button" ng-click="deleteTransaction(transaction.id)">Delete</button> </button></li>
     </span>
     </ul>
 
-    <br/>**Next time start with selection criteria values not coming through!! Just shows all transactions every time.
+    <br/>
+    Balance (based on selected criteria): {{balance}}
 </span>
 
 </body>

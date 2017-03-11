@@ -100,22 +100,11 @@ public class JSONController {
         return allTransactions;
     }
 
-    @RequestMapping(path = "/getBalance.json", method = RequestMethod.POST)
-    public double getBalance(@RequestBody String month) {
-        double balance = 0.0;
-        ArrayList<Transaction> allByMonth = transactionRepo.findAllByUserAndDate(currentUser,month);
-        for (Transaction transaction : allByMonth) {
-            if (transaction.getType().equals("Withdrawal")) {
-                balance -= transaction.getAmount();
-            } else if (transaction.getType().equals("Deposit")) {
-                balance += transaction.getAmount();
-            }
-        }
-        return balance;
-    }
-
     @RequestMapping(path = "/submitDisplayOptions.json", method = RequestMethod.POST)
-    public ArrayList<Transaction> submitDisplayOptions(@RequestBody Transaction transactionEx) {
+    public ContainerTransactionsAndBalance submitDisplayOptions(@RequestBody Transaction transactionEx) {
+        ContainerTransactionsAndBalance returnContainer;
+        double balance;
+
         boolean dateSet = false, typeSet = false, categorySet = false, mediumSet = false;
         ArrayList<Transaction> transactions = new ArrayList<>();
         String date = null, type = null, medium = null, category = null;
@@ -212,6 +201,21 @@ public class JSONController {
             //return all transactions if nothing selected.
             transactions = transactionRepo.findAllByUser(currentUser);
         }
-        return transactions;
+
+        balance = getBalance(transactions);
+        returnContainer = new ContainerTransactionsAndBalance(transactions, balance);
+        return returnContainer;
+    }
+
+    public double getBalance(ArrayList<Transaction> transactions) {
+        double balance = 0.0;
+        for (Transaction transaction : transactions) {
+            if (transaction.getType().equals("Withdrawal")) {
+                balance -= transaction.getAmount();
+            } else if (transaction.getType().equals("Deposit")) {
+                balance += transaction.getAmount();
+            }
+        }
+        return balance;
     }
 }

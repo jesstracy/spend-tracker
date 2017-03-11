@@ -58,7 +58,6 @@ angular.module('SpendTrackerApp', [])
             console.log("In logout function in home-ng-controller");
             $scope.loginScreen = true;
             $scope.allTransactions = {};
-            $scope.monthlyBalance = false;
         };
 
         $scope.submitTransaction = function(date, name, amount, type, medium, category) {
@@ -136,21 +135,6 @@ angular.module('SpendTrackerApp', [])
                     });
         };
 
-        $scope.getBalance = function(month) {
-            console.log("In getBalance function in home-ng-controller");
-
-            $http.post("/getBalance.json", month)
-                .then(
-                    function successCallback(response) {
-                        console.log(response.data);
-                        console.log("Adding data to scope");
-                        $scope.monthlyBalance = response.data;
-                    },
-                    function errorCallback(response) {
-                        console.log("Unable to get data...");
-                    });
-        };
-
         $scope.deleteTransaction = function(id) {
             console.log("In deleteTransaction function in home-ng-controller");
 
@@ -197,7 +181,8 @@ angular.module('SpendTrackerApp', [])
                     function successCallback(response) {
                         console.log(response.data);
                         console.log("Adding data to scope");
-                        $scope.allTransactions = response.data;
+                        $scope.allTransactions = response.data.transactions;
+                        $scope.balance = response.data.balance;
                     },
                     function errorCallback(response) {
                         console.log("Unable to get data...");
