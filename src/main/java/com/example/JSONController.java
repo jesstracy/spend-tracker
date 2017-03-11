@@ -121,6 +121,12 @@ public class JSONController {
         String date = null, type = null, medium = null, category = null;
 
         System.out.println("In submitDisplayOptions in REST controller");
+        
+        //When for REAL-- take this out! (it will set it on login/register)
+        if (currentUser == null) {
+            System.out.println("Setting user as Jessica (id 11) for testing!");
+            currentUser = userRepo.findOne(11);
+        }
         System.out.println("Current user: " + currentUser.getEmail());
         System.out.println("Date: " + transactionEx.getDate());
         System.out.println("Type: " + transactionEx.getType());

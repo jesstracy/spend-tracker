@@ -1,7 +1,15 @@
 angular.module('SpendTrackerApp', [])
    .controller('SpendTrackerController', function($scope, $http, $window) {
         $scope.angularTest = "yes";
-        $scope.loginScreen = true;
+
+        // When for realz-- make sure you set loginScreen here to true and take out currentUser!!!
+        $scope.loginScreen = false;
+        $scope.currentUser = {
+            id: 11,
+            email: "jt@tiy.com",
+            password: "pass",
+            paycheck: 1634.36
+        }
 
         $scope.login = function(email, password) {
             console.log("In login function in home-ng-controller");
