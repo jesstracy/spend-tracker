@@ -169,6 +169,19 @@ angular.module('SpendTrackerApp', [])
         $scope.submitDisplayOptions = function(date, type, medium, category) {
             console.log("In submitDisplayOptions function in home-ng-controller");
 
+            if (date === "") {
+                date = undefined;
+            }
+            if (type === "Deselect") {
+                type = undefined;
+            }
+            if (medium === "Deselect") {
+                medium = undefined;
+            }
+            if (category === "Deselect") {
+                category = undefined;
+            }
+
             var displayCriteriaAsTransaction = {
                 date: date,
                 type: type,
@@ -177,7 +190,7 @@ angular.module('SpendTrackerApp', [])
             }
 
             console.log("This is the object I'm sending to backend:");
-            console.log(displayCriteriaAsTransaction)
+            console.log(displayCriteriaAsTransaction);
 
             $http.post("/submitDisplayOptions.json", displayCriteriaAsTransaction)
                 .then(
