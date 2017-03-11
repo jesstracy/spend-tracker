@@ -203,7 +203,7 @@ public class JSONController {
             //return medium only
             transactions = transactionRepo.findAllByUserAndMedium(currentUser, medium);
         } else {
-            //return all transactions
+            //return all transactions if nothing selected.
             transactions = transactionRepo.findAllByUser(currentUser);
         }
         return transactions;
