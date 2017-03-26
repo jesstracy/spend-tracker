@@ -11,6 +11,12 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Spend Tracker App</title>
+    function ClearFields() {
+        document.getElementById("1").value = "";
+        document.getElementById("2").value = "";
+        document.getElementById("3").value = "";
+        document.getElementById("4").value = "";
+    }
 </head>
 <body ng-controller="SpendTrackerController">
 {{! changing the mustache delimiter so it doesn't conflict with }}
@@ -94,7 +100,8 @@
                                     <br/><br/>
                                     Or.. <br/>
                                     Date: <input type="text" class="form-control" ng-model="dateP" placeholder="Ex: Jan2017"/> <br/>
-                                    <button class="btn btn-default" type="button" ng-click="submitTransaction(dateP, 'Paycheck', 'PYCHK-AMT', 'Deposit', 'Direct deposit', 'Paycheck')">Paycheck</button>
+                                    <button class="btn btn-default" type="button" ng-click="submitTransaction(dateP, 'Paycheck', 'PYCHK-AMT', 'Deposit', 'Direct deposit', 'Paycheck')">Paycheck</button><br/><br/>
+                                    <input class="btn btn-default" type="reset" value="Reset All"/>
                                 </form>
                             </div>
                         </div>
@@ -105,6 +112,8 @@
                 </div>
             </div>
         </div>
+
+        <br/><br/><br/>
 
     </span>
 

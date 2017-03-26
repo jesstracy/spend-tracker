@@ -84,6 +84,9 @@ angular.module('SpendTrackerApp', [])
                         //console.log(response.data);
                         //console.log("Adding data to scope");
                         //$scope.allSubmissions = response.data;
+                        $scope.date = undefined;
+                        $scope.name = undefined;
+                        $scope.amount = undefined;
                     },
                     function errorCallback(response) {
                         console.log("Unable to get data...");
