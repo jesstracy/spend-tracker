@@ -17,82 +17,98 @@
 {{! the default angularjs delimeters - https://mustache.github.io/mustache.5.html for more info }}
 {{=<% %>=}}
 
-<br/>
-~welcome~
+<div class="container">
 
-<br/><br/>
+    <span ng-if="loginScreen">
 
-<span ng-if="loginScreen">
-    Does angular work?
-    {{angularTest}}
+        <br/><br/>
 
-    <br/><br/>
+        Login: <br/>
+        Email: <input class="form-control" type="text" ng-model="email"/> <br/>
+        Password: <input class="form-control"type="password" ng-model="password"/> <br/>
+        <button class="btn btn-default" type="button" ng-click="login(email, password)">Login</button>
 
-    Login: <br/>
-    Email: <input type="text" ng-model="email"/> <br/>
-    Password: <input type="password" ng-model="password"/> <br/>
-    <button type="button" ng-click="login(email, password)">Login</button>
+        <br/><br/>
+        Or register: <br/>
+        Email: <input class="form-control" type="text" ng-model="emailR"/> <br/>
+        Password: <input class="form-control" type="password" ng-model="passwordR"/> <br/>
+        Paycheck amount: <input class="form-control" type="number" ng-model="paycheckR"> <br/>
+        <button class="btn btn-default" type="button" ng-click="register(emailR, passwordR, paycheckR)">Register</button>
 
-    <br/><br/>
-    Or register: <br/>
-    Email: <input type="text" ng-model="emailR"/> <br/>
-    Password: <input type="password" ng-model="passwordR"/> <br/>
-    Paycheck amount: <input type="number" ng-model="paycheckR"> <br/>
-    <button type="button" ng-click="register(emailR, passwordR, paycheckR)">Register</button>
+        <br/><br/>
 
-    <br/><br/>
-
-</span>
-
-<span ng-if="!loginScreen">
-    <button type="button" ng-click="logout()">Logout</button>
-    <br/><br/>
-
-    Enter a new transaction:<br/>
-    Date: <input type="text" ng-model="date" placeholder="Ex: Jan2017"/> <br/>
-    Name: <input type="text" ng-model="name"/> <br/>
-    Amount: <input type="text" ng-model="amount"/> <br/>
-    Type: <input type="radio" name="type" ng-model="type" value="Withdrawal">Withdrawal <input type="radio" name="type" ng-model="type" value="Deposit">Deposit <br/>
-    Medium: <input type="radio" name="medium" ng-model="medium" value="Credit card">Credit card <input type="radio" name="medium" ng-model="medium" value="Debit card">Debit card <input type="radio" name="medium" ng-model="medium" value="Cash">Cash <input type="radio" name="medium" ng-model="medium" value="Check">Check <input type="radio" name="medium" ng-model="medium" value="Direct deposit">Direct deposit <br/>
-    Category: <input type="radio" name="category" ng-model="category" value="Grocery">Grocery <input type="radio" name="category" ng-model="category" value="Gas">Gas <input type="radio" name="category" ng-model="category" value="Restaurant">Restaurant <input type="radio" name="category" ng-model="category" value="Entertainment">Entertainment <input type="radio" name="category" ng-model="category" value="Monthly bill">Monthly bill <input type="radio" name="category" ng-model="category" value="Paycheck">Paycheck <input type="radio" name="category" ng-model="category" value="Other">Other <br/>
-    <button type="button" ng-click="submitTransaction(date, name, amount, type, medium, category)">Submit</button>
-    Or.. <br/>
-    Date: <input type="text" ng-model="dateP" placeholder="Ex: Jan2017"/> <br/>
-    <button type="button" ng-click="submitTransaction(dateP, 'Paycheck', 'PYCHK-AMT', 'Deposit', 'Direct deposit', 'Paycheck')">Paycheck</button>
-
-    <br/><br/><br/>
-    <!--<button type="button" ng-click="getAllTransactions()">See all transactions</button> <br/>-->
-    <!--<input type="radio" name="typeFilter" ng-model="typeFilter" value="Withdrawal">Withdrawal <input type="radio" name="typeFilter" ng-model="typeFilter" value="Deposit">Deposit<button type="button" ng-click="getTransactionsByType(typeFilter)">See all by type</button> <br/>-->
-    <!--<input type="text" ng-model="dateFilter"/> <button type="button" ng-click="getTransactionsByDate(dateFilter)">See all by date</button>-->
-    <!--<ul>-->
-        <!--<span ng-repeat="transaction in allTransactions">-->
-            <!--<li>{{transaction.date}} {{transaction.name}} {{transaction.amount}} {{transaction.type}} <button type="button" ng-click="deleteTransaction(transaction.id)">Delete</button> </button></li>-->
-        <!--</span>-->
-    <!--</ul>-->
-
-    <br/><br/>
-
-    <!-- Menu for displaying transactions based on criteria: date, type, medium, category, and combinations of those -->
-    Display all transactions based on: <br/>
-    Date: <input type="text" name="dateSelection" ng-model="dateSelection" placeholder="Ex: Jan2017"/> <br/>
-    Type: <input type="radio" name="typeSelection" ng-model="typeSelection" value="Withdrawal">Withdrawal <input type="radio" name="typeSelection" ng-model="typeSelection" value="Deposit">Deposit (<input type="radio" name="typeSelection" ng-model="typeSelection" value="Deselect">Deselect) <br/>
-    Medium: <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Credit card">Credit card <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Debit card">Debit card <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Cash">Cash <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Check">Check <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Direct deposit">Direct deposit (<input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Deselect">Deselect) <br/>
-    Category: <input type="radio" name="categorySelection" ng-model="categorySelection" value="Grocery">Grocery <input type="radio" name="categorySelection" ng-model="categorySelection" value="Gas">Gas <input type="radio" name="categorySelection" ng-model="categorySelection" value="Restaurant">Restaurant <input type="radio" name="categorySelection" ng-model="categorySelection" value="Entertainment">Entertainment <input type="radio" name="categorySelection" ng-model="categorySelection" value="Monthly bill">Monthly bill <input type="radio" name="categorySelection" ng-model="categorySelection" value="Paycheck">Paycheck <input type="radio" name="categorySelection" ng-model="categorySelection" value="Other">Other (<input type="radio" name="categorySelection" ng-model="categorySelection" value="Deselect">Deselect) <br/>
-
-    <br/>
-    <button type="button" ng-click="submitDisplayOptions(dateSelection, typeSelection, mediumSelection, categorySelection)">Submit</button>
-
-    <br/><br/>
-    Transactions (based on selected criteria): <br/>
-    <ul>
-    <span ng-repeat="transaction in allTransactions">
-    <li>{{transaction.date}} {{transaction.name}} {{transaction.amount}} ({{transaction.type}}, {{transaction.medium}}, {{transaction.category}}) <button type="button" ng-click="deleteTransaction(transaction.id)">Delete</button> </button></li>
     </span>
-    </ul>
 
-    <br/>
-    Balance (based on selected criteria): {{balance}}
-</span>
+    <span ng-if="!loginScreen">
+        <br/>
+        ~welcome, {{currentUser.email}}~
+        <br/><br/>
+
+        <button class="btn btn-default" type="button" ng-click="logout()">Logout</button>
+        <br/><br/><br/>
+
+        <!-- Menu for displaying transactions based on criteria: date, type, medium, category, and combinations of those -->
+        Display all transactions based on: <br/>
+        Date: <input type="text" name="dateSelection" ng-model="dateSelection" placeholder="Ex: Jan2017"/> <br/>
+        Type: <input type="radio" name="typeSelection" ng-model="typeSelection" value="Withdrawal"> Withdrawal <input type="radio" name="typeSelection" ng-model="typeSelection" value="Deposit"> Deposit (<input type="radio" name="typeSelection" ng-model="typeSelection" value="Deselect"> Deselect) <br/>
+        Medium: <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Credit card"> Credit card <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Debit card"> Debit card <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Cash"> Cash <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Check"> Check <input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Direct deposit"> Direct deposit (<input type="radio" name="mediumSelection" ng-model="mediumSelection" value="Deselect"> Deselect) <br/>
+        Category: <input type="radio" name="categorySelection" ng-model="categorySelection" value="Grocery"> Grocery <input type="radio" name="categorySelection" ng-model="categorySelection" value="Gas"> Gas <input type="radio" name="categorySelection" ng-model="categorySelection" value="Restaurant"> Restaurant <input type="radio" name="categorySelection" ng-model="categorySelection" value="Entertainment"> Entertainment <input type="radio" name="categorySelection" ng-model="categorySelection" value="Monthly bill"> Monthly bill <input type="radio" name="categorySelection" ng-model="categorySelection" value="Paycheck"> Paycheck <input type="radio" name="categorySelection" ng-model="categorySelection" value="Other"> Other (<input type="radio" name="categorySelection" ng-model="categorySelection" value="Deselect"> Deselect) <br/>
+
+        <br/>
+        <button class="btn btn-default" type="button" ng-click="submitDisplayOptions(dateSelection, typeSelection, mediumSelection, categorySelection)">Submit</button>
+
+        <br/><br/>
+        Transactions (based on selected criteria): <br/>
+        <ul>
+        <span ng-repeat="transaction in allTransactions">
+        <li>{{transaction.date}} {{transaction.name}} {{transaction.amount}} ({{transaction.type}}, {{transaction.medium}}, {{transaction.category}}) <button class="btn btn-default" type="button" ng-click="deleteTransaction(transaction.id)">Delete</button> </button></li>
+        </span>
+        </ul>
+
+        <br/>
+        Balance (based on selected criteria): {{balance}}
+        <br/><br/>
+
+        <div> <!-- Trigger the modal with a button -->
+            <button type="button" id="classes" class="btn btn-default"  data-toggle="modal" data-target="#myModals">Enter a New Transaction</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModals" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Enter a new transaction</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <form valign="top">
+                                    Date: <input type="text" class="form-control" ng-model="date" placeholder="Ex: Jan2017"/> <br/>
+                                    Name: <input type="text" class="form-control" ng-model="name"/> <br/>
+                                    Amount: <input type="text" class="form-control" ng-model="amount"/> <br/>
+                                    Type: <input type="radio" name="type" ng-model="type" value="Withdrawal"> Withdrawal <input type="radio" name="type" ng-model="type" value="Deposit"> Deposit <br/><br/>
+                                    Medium: <input type="radio" name="medium" ng-model="medium" value="Credit card"> Credit card <input type="radio" name="medium" ng-model="medium" value="Debit card"> Debit card <input type="radio" name="medium" ng-model="medium" value="Cash"> Cash <input type="radio" name="medium" ng-model="medium" value="Check"> Check <input type="radio" name="medium" ng-model="medium" value="Direct deposit"> Direct deposit <br/><br/>
+                                    Category: <input type="radio" name="category" ng-model="category" value="Grocery"> Grocery <input type="radio" name="category" ng-model="category" value="Gas"> Gas <input type="radio" name="category" ng-model="category" value="Restaurant"> Restaurant <input type="radio" name="category" ng-model="category" value="Entertainment"> Entertainment <input type="radio" name="category" ng-model="category" value="Monthly bill"> Monthly bill <input type="radio" name="category" ng-model="category" value="Paycheck"> Paycheck <input type="radio" name="category" ng-model="category" value="Other"> Other <br/><br/>
+                                    <button class="btn btn-default" type="button" ng-click="submitTransaction(date, name, amount, type, medium, category)">Submit</button> <br/>
+                                    <br/><br/>
+                                    Or.. <br/>
+                                    Date: <input type="text" class="form-control" ng-model="dateP" placeholder="Ex: Jan2017"/> <br/>
+                                    <button class="btn btn-default" type="button" ng-click="submitTransaction(dateP, 'Paycheck', 'PYCHK-AMT', 'Deposit', 'Direct deposit', 'Paycheck')">Paycheck</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </span>
+
+</div>
 
 </body>
 </html>
