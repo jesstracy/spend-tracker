@@ -197,10 +197,129 @@ angular.module('SpendTrackerApp', ["chart.js"])
                         console.log("Adding data to scope");
                         $scope.allTransactions = response.data.transactions;
                         $scope.balance = response.data.balance;
+                        updateGraph(response.data)
                     },
                     function errorCallback(response) {
                         console.log("Unable to get data...");
                     });
         };
 
+        var updateGraph = function(container) {
+            // call this in submit display options!
+            console.log("In updateGraph function in home-ng-controller START WITH THIS NEXT TIME!");
+            // we get back an arrayList of transactions and overall balance.
+            // For now we'll just make it show each month and how much we've spent?
+            // Also eventually can maybe either not return balance separately and do all logic on js side, OR do all logic on backend.
+
+//            getCorrectAverage(assignment);
+//            var gradeCategories = ["0-9", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90-99", "100+"];
+//
+//            $scope.labels = gradeCategories;
+            var monthLabels = new Array();
+            for (i = 0; i < container.transactions.length; i++) {
+                //check if the month of the transaction is already in the list
+                alreadyInMonthList = false;
+                for (j = 0; j < monthLabels.length; j++)  {
+                    if (container.transactions[i].date === monthLabels[j]) {
+                        alreadyInMonthList = true;
+                        break;
+                    }
+                }
+                //If it's not in the month list, add it.
+                if (!alreadyInMonthList) {
+                    monthLabels.push(container.transactions[i].date);
+                }
+            }
+            console.log(monthLabels);
+            // Next will actually make these the graph labels.
+
+            $scope.labels = monthLabels;
+//
+//            $scope.series = ['Original Grades', 'Curved/Modified Grades'];
+//            $scope.data = [
+//                gradeDataForTable.percentagesOfOriginalGrades,
+//                gradeDataForTable.percentagesOfCurvedGrades
+//            ];
+//
+//            $scope.onClick = function (points, evt) {
+//                console.log(points, evt);
+//            };
+//            $scope.datasetOverride = [
+//                {
+//                    yAxisID: 'y-axis-1'
+//                },
+//                {
+//                    xAxisID: 'x-axis-1'
+//                }
+//
+//            ];
+//            $scope.options = {
+//                title: {
+//                    display: true,
+//                    text: 'Grade Distribution Graph for ' + assignment.name
+//                },
+//                legend: {
+//                    display: true,
+//                    position: 'top'
+//                },
+//                scales: {
+//                  yAxes: [
+//                    {
+//                      id: 'y-axis-1',
+//                      type: 'linear',
+//                      display: true,
+//                      position: 'left',
+//                      ticks: {
+//                        min: 0,
+//                        max: 100,
+//                        beginAtZero: true
+//                      },
+//                      scaleLabel: {
+//                              display: true,
+//                              labelString: 'Percentage of students'
+//                      }
+//                    }
+//                  ],
+//                  xAxes: [
+//                      {
+//                        id: 'x-axis-1',
+//                        display: true,
+//                        position: 'bottom',
+//                        scaleLabel: {
+//                                display: true,
+//                                labelString: 'Grade on assignment'
+//                        }
+//                      }
+//                    ]
+//                }
+        };
+
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
