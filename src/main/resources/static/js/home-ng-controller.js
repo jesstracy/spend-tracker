@@ -1,4 +1,15 @@
-angular.module('SpendTrackerApp', [])
+angular.module('SpendTrackerApp', ["chart.js"])
+    .config(['ChartJsProvider', function (ChartJsProvider) {
+        // Configure all charts
+        ChartJsProvider.setOptions({
+          chartColors: ['#FF5252', '#4286f4'],
+          responsive: false
+        });
+        // Configure all line charts
+        ChartJsProvider.setOptions('line', {
+          showLines: true
+        });
+    }])
    .controller('SpendTrackerController', function($scope, $http, $window) {
         $scope.angularTest = "yes";
 
